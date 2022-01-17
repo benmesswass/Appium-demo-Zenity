@@ -1,0 +1,19 @@
+package fr.zenity.appium.stepDefinitions;
+
+import fr.zenity.appium.PageObjects.PassOrderPage;
+import io.cucumber.java8.En;
+
+public class PassOrderSteps implements En {
+
+    public PassOrderSteps(PassOrderPage passOrderPage) {
+        Given("^user is connected to his account$", () -> {
+            passOrderPage.loggedIn();
+        });
+        When("^user wants to add products to his cart$", () -> {
+            passOrderPage.addProductToCart();
+        });
+        Then("^user should be able to confirm his order using his card information: \"([^\"]*)\" \"([^\"]*)\" and \"([^\"]*)\"$", (String cardNbre, String expirationDate, String code) -> {
+            passOrderPage.confirmCart(cardNbre, expirationDate, code);
+        });
+    }
+}
