@@ -1,6 +1,6 @@
 package fr.zenity.appium.stepDefinitions;
 
-import fr.zenity.appium.PageObjects.LoginPage;
+import PageObjects.LoginPage;
 import io.cucumber.java8.En;
 
 public class LoginSteps implements En {

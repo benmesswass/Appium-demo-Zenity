@@ -1,4 +1,4 @@
-package fr.zenity.appium.PageObjects;
+package PageObjects;
 
 import fr.zenity.appium.Enum.Direction;
 import fr.zenity.appium.drivers.MobileDriverManager;
@@ -9,14 +9,10 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 public abstract class View {
 
@@ -42,7 +38,7 @@ public abstract class View {
         wait        = new WebDriverWait(driver, 5);
         shortWait   = new WebDriverWait(driver, 10);
         middleWait  = new WebDriverWait(driver, 20);
-        longWait    = new WebDriverWait(driver, 600);
+        longWait    = new WebDriverWait(driver, 6);
 
     }
 

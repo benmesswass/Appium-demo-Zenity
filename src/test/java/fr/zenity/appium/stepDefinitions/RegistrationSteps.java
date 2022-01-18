@@ -1,6 +1,6 @@
 package fr.zenity.appium.stepDefinitions;
 
-import fr.zenity.appium.PageObjects.RegistrationPage;
+import PageObjects.RegistrationPage;
 import io.cucumber.java8.En;
 
 public class RegistrationSteps implements En {

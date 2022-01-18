@@ -1,6 +1,6 @@
 package fr.zenity.appium.stepDefinitions;
 
-import fr.zenity.appium.PageObjects.DisconnectionPage;
+import PageObjects.DisconnectionPage;
 import io.cucumber.java8.En;
 
 public class DisconnectSteps implements En {
