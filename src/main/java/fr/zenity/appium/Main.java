@@ -5,9 +5,11 @@ import fr.zenity.appium.Enum.Plateform;
 import fr.zenity.appium.drivers.MobileDriverManager;
 import fr.zenity.appium.server.AppiumServer;
 
+import java.net.MalformedURLException;
+
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws MalformedURLException {
 
         if(AppiumServer.isRunning())AppiumServer.Stop();
         AppiumServer.start();

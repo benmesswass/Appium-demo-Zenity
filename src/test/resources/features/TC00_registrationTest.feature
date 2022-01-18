@@ -1,7 +1,7 @@
 @non-reg
 Feature: As a user I want to register to my account and disconnect after
 
-  @Login
+  @Registration
   Scenario Outline: Login scenario
     Given user is on the home page
     When user clicks on register button

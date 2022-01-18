@@ -1,6 +1,6 @@
 package fr.zenity.appium.stepDefinitions;
 
-import fr.zenity.appium.PageObjects.PassOrderPage;
+import PageObjects.PassOrderPage;
 import io.cucumber.java8.En;
 
 public class PassOrderSteps implements En {

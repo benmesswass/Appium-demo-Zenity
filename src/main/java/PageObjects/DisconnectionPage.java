@@ -1,13 +1,10 @@
-package fr.zenity.appium.PageObjects;
+package PageObjects;
 
 import fr.zenity.appium.Enum.Direction;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import org.openqa.selenium.By;
 
-import java.awt.*;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 
 public class DisconnectionPage extends View{
