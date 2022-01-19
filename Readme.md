@@ -104,6 +104,8 @@ In order to run our program, you should respect the following prerequisites.
    ```sh
    cd C:\Users\PC77_Zenity\AppData\Local\Local\Android\Sdk\emulator
    emulator -avd Pixel2
+   for headless mode: 
+   emulator -avd Pixel2 -no-window
    ```
 
 4. Run the project using Maven
@@ -127,7 +129,7 @@ In order to run our program, you should respect the following prerequisites.
    ```sh
    go to C:\Users\PC77_Zenity\AppData\Local\Local\Android\Sdk\tools\bin
   
-   launch uiautomatorviewer
+   launch uiautomatorviewer  
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
