@@ -1,7 +1,7 @@
 @non-reg
 Feature: As a user I want to pass an order
 
-  @Login
+  @PassOrder
   Scenario Outline: passOrder scenario
     Given user is connected to his account
     When  user wants to add products to his cart
