@@ -28,7 +28,11 @@ public class LoginPage extends View{
     @AndroidFindBy(xpath="//android.widget.ImageView[@index=\"4\"]")
     private MobileElement flashDeals;
 
+    @AndroidFindBy(xpath="//android.widget.Button[1]")
+    private MobileElement isOK;
+
     public void ConnectionPageVerif() {
+        checkIfElementIsPresentAndGotoNewElement(isOK);
         longWait.until(visibilityOf(connectionPage));
         assertThat(connectionPage.isDisplayed(),equalTo(true));
     }

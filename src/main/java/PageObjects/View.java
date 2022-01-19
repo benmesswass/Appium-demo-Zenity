@@ -8,8 +8,10 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import org.junit.Assert;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -40,6 +42,19 @@ public abstract class View {
         middleWait  = new WebDriverWait(driver, 20);
         longWait    = new WebDriverWait(driver, 6);
 
+    }
+
+    public void checkIfElementIsPresentAndGotoNewElement(MobileElement mElPresent) {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        try {
+            if (wait.until(ExpectedConditions.visibilityOf(mElPresent)) != null) {
+                Assert.assertTrue(mElPresent.isDisplayed());
+                wait.until(ExpectedConditions.visibilityOf(mElPresent));
+                mElPresent.click();
+            }
+        } catch (Exception e) {
+            System.out.println("Element not present, we are good here!");
+        }
     }
 
     /**
