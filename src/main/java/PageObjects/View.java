@@ -5,6 +5,7 @@ import fr.zenity.appium.drivers.MobileDriverManager;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
@@ -16,18 +17,39 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
+
 public abstract class View {
 
+    @AndroidFindBy(xpath="//android.view.View[@index=\"9\"]")
+    private MobileElement connectionPage;
 
+    @AndroidFindBy(xpath="//android.widget.ImageView[@index=\"0\"]")
+    private MobileElement mailField;
+
+    @AndroidFindBy(xpath="//android.widget.EditText[@index=\"1\"]")
+    private MobileElement passwordField;
+
+    @AndroidFindBy(xpath="//android.widget.Button[@index=\"5\"]")
+    private MobileElement continueBtn;
+
+    @AndroidFindBy(xpath="//android.widget.Button[@index=\"3\"]")
+    private MobileElement registrationSuccessMsg;
+
+    @AndroidFindBy(xpath="//android.widget.ImageView[@index=\"4\"]")
+    private MobileElement flashDeals;
+
+    @AndroidFindBy(xpath="//android.widget.Button[1]")
+    private MobileElement isOK;
     protected AppiumDriver<MobileElement> driver;
 
     protected WebDriverWait wait;
     protected WebDriverWait shortWait;
     protected WebDriverWait middleWait;
     protected WebDriverWait longWait;
-
-    //protected JavascriptExecutor js;
-
 
     protected View (){
         driver = MobileDriverManager
@@ -44,18 +66,31 @@ public abstract class View {
 
     }
 
-    public void checkIfElementIsPresentAndGotoNewElement(MobileElement mElPresent) {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        try {
-            if (wait.until(ExpectedConditions.visibilityOf(mElPresent)) != null) {
-                Assert.assertTrue(mElPresent.isDisplayed());
-                wait.until(ExpectedConditions.visibilityOf(mElPresent));
-                mElPresent.click();
-            }
-        } catch (Exception e) {
-            System.out.println("Element not present, we are good here!");
-        }
+    public void clickOnContinue(){
+        shortWait.until(elementToBeClickable(isOK)).click();
     }
+
+    public void ConnectionPageVerif() {
+        longWait.until(visibilityOf(connectionPage));
+        assertThat(connectionPage.isDisplayed(),equalTo(true));
+    }
+
+    public  void enterCredentials(String mail, String password) {
+        shortWait.until(elementToBeClickable(mailField)).click();
+        mailField.click();
+        mailField.sendKeys(mail);
+        shortWait.until(elementToBeClickable(passwordField)).click();
+        passwordField.click();
+        passwordField.sendKeys(password);
+        longWait.until(elementToBeClickable(continueBtn)).click();
+        longWait.until(elementToBeClickable(registrationSuccessMsg)).click();
+    }
+
+    public void loggedIn() {
+        longWait.until(visibilityOf(flashDeals));
+        assertThat(flashDeals.isDisplayed(),equalTo(true));
+    }
+
 
     /**
      * Performs swipe from the center of screen

@@ -8,4 +8,6 @@ Feature: As a user I want to login to my account
     Then  user should be logged in
     Examples:
       | mail                         | password      |
-      | appiumtestzenity@yopmail.com | Test12345     |
+      | gregoryzenity@yopmail.com    | Test12345     |
+      | gregoryzenity2@yopmail.com   | Test12345     |
+      | gregoryzenity3@yopmail.com    | Test12345     |

@@ -18,6 +18,7 @@ public class RegistrationSteps implements En {
 
         And("^user enters his \"([^\"]*)\" and his \"([^\"]*)\"$",(String mail, String password) -> {
             registrationPage.enterCredentials(mail,password);
+            registrationPage.submit();
         });
 
         Then("^user should be registered$",() -> {

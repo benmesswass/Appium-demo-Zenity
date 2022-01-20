@@ -2,6 +2,7 @@ package PageObjects;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -31,6 +32,9 @@ public class RegistrationPage extends View{
     @AndroidFindBy(xpath="//android.widget.Button[@index=\"3\"]")
     private MobileElement registrationSuccessMsg;
 
+    @AndroidFindBy(xpath="//android.view.View[@index=\"\"]")
+    private MobileElement errorMailMsg;
+
     public boolean applicationOk(){
         longWait.until(visibilityOf(isOK));
         return true;
@@ -45,26 +49,40 @@ public class RegistrationPage extends View{
     }
 
     public  void enterCredentials(String mail, String password) {
-        shortWait.until(elementToBeClickable(mailField)).click();
-        mailField.click();
-        mailField.sendKeys(mail);
 
-        shortWait.until(elementToBeClickable(passwordField)).click();
-        passwordField.click();
-        passwordField.sendKeys(password);
+            shortWait.until(elementToBeClickable(mailField)).click();
+            mailField.click();
+            mailField.sendKeys(mail);
+            shortWait.until(elementToBeClickable(passwordField)).click();
+            passwordField.click();
+            passwordField.sendKeys(password);
+            shortWait.until(elementToBeClickable(confirmPasswordField)).click();
+            confirmPasswordField.click();
+            confirmPasswordField.sendKeys(password);
 
-        shortWait.until(elementToBeClickable(confirmPasswordField)).click();
-        confirmPasswordField.click();
-        confirmPasswordField.sendKeys(password);
+        /*
+        if (shortWait.until(visibilityOf(errorMailMsg)).getText() == ){
 
-        longWait.until(elementToBeClickable(continueBtn)).click();
+        }
+         */
+
+        //longWait.until(elementToBeClickable(continueBtn)).click();
     }
 
+    public void submit(){
+        wait.until(ExpectedConditions.visibilityOf(continueBtn));
+        continueBtn.click();
+    }
     public void registrationConfirmation()  {
-        longWait.until(elementToBeClickable(registrationSuccessMsg));
-        assertThat(registrationSuccessMsg.isDisplayed(),equalTo(true));
-        registrationSuccessMsg.click();
+        try {
+            longWait.until(elementToBeClickable(registrationSuccessMsg));
+            //assertThat(registrationSuccessMsg.isDisplayed(), equalTo(true));
+            registrationSuccessMsg.click();
+        }
+        catch(Exception e){
+        System.out.println("-----exception invalid credentials-------");
+        e.printStackTrace();
+        }
+
     }
-
-
 }

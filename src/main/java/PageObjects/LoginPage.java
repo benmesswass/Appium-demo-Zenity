@@ -30,9 +30,12 @@ public class LoginPage extends View{
 
     @AndroidFindBy(xpath="//android.widget.Button[1]")
     private MobileElement isOK;
+/*
+    public void clickOnContinue(){
+        shortWait.until(elementToBeClickable(isOK)).click();
+    }
 
     public void ConnectionPageVerif() {
-        checkIfElementIsPresentAndGotoNewElement(isOK);
         longWait.until(visibilityOf(connectionPage));
         assertThat(connectionPage.isDisplayed(),equalTo(true));
     }
@@ -54,4 +57,6 @@ public class LoginPage extends View{
         longWait.until(visibilityOf(flashDeals));
         assertThat(flashDeals.isDisplayed(),equalTo(true));
     }
+
+ */
 }

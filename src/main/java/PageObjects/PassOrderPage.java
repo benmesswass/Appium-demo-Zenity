@@ -41,7 +41,7 @@ public class PassOrderPage extends View{
     private MobileElement cartConfirmed;
 
 
-    public void loggedIn() throws InterruptedException {
+    public void loggedIn() {
         longWait.until(visibilityOf(flashDeals));
         assertThat(flashDeals.isDisplayed(),equalTo(true));
     }
