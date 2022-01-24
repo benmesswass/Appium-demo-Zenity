@@ -2,6 +2,7 @@ package PageObjects;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -32,8 +33,8 @@ public class RegistrationPage extends View{
     @AndroidFindBy(xpath="//android.widget.Button[@index=\"3\"]")
     private MobileElement registrationSuccessMsg;
 
-    @AndroidFindBy(xpath="//android.view.View[@index=\"\"]")
-    private MobileElement errorMailMsg;
+    /*@AndroidFindBy(xpath="//android.view.View[@index=\"6\"]")
+    private MobileElement errorMailMsg;*/
 
     public boolean applicationOk(){
         longWait.until(visibilityOf(isOK));
@@ -73,16 +74,25 @@ public class RegistrationPage extends View{
         wait.until(ExpectedConditions.visibilityOf(continueBtn));
         continueBtn.click();
     }
-    public void registrationConfirmation()  {
+
+    /*public void checkErrorMsg(String mail, String password ){
+        try {
+            wait.until(ExpectedConditions.visibilityOf(errorMailMsg));
+            Assert.fail("invalid credentials:  \n mail: "+mail+"\n password: "+ password+"\n "+errorMailMsg.getAttribute("content-desc"));
+        }
+        catch(Exception e){
+        System.out.println("---valid credentials: mail: "+mail+", password: "+ password);
+        }
+    }*/
+ /*   public void successMsgClick()  {
         try {
             longWait.until(elementToBeClickable(registrationSuccessMsg));
-            //assertThat(registrationSuccessMsg.isDisplayed(), equalTo(true));
             registrationSuccessMsg.click();
         }
         catch(Exception e){
         System.out.println("-----exception invalid credentials-------");
         e.printStackTrace();
         }
-
-    }
+        }
+  */
 }

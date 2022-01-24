@@ -3,6 +3,11 @@ package PageObjects;
 import fr.zenity.appium.Enum.Direction;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.junit.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
@@ -40,6 +45,12 @@ public class PassOrderPage extends View{
     @AndroidFindBy(xpath="//android.widget.Button[@index=\"1\"]")
     private MobileElement cartConfirmed;
 
+    @AndroidFindBy(xpath="//android.widget.TextView[@index=\"0\"]")
+    private MobileElement cardErr;
+
+    @AndroidFindBy(className="android.view.View")
+    private List<MobileElement> productsList;
+
 
     public void loggedIn() {
         longWait.until(visibilityOf(flashDeals));
@@ -49,6 +60,9 @@ public class PassOrderPage extends View{
     public void addProductToCart() throws InterruptedException {
         //Thread.sleep(2000);
         swipeScreen(Direction.UP);
+        /*System.out.println("----products List size: "+productsList.size());
+        productsList.stream().forEach(element -> System.out.println("---products List: "+ element));*/
+
         longWait.until(elementToBeClickable(productToadd)).click();
         //Thread.sleep(2000);
         swipeScreen(Direction.UP);
@@ -62,6 +76,20 @@ public class PassOrderPage extends View{
         longWait.until(visibilityOf(expirationDateField)).sendKeys(expirationDate);
         longWait.until(visibilityOf(CVCField)).sendKeys(code);
         longWait.until(elementToBeClickable(saveBtn)).click();
+    }
+
+    public void checkErrMsgCard(){
+        try {
+            longWait.until(ExpectedConditions.visibilityOf(cardErr));
+            Assert.fail("ERROR: "+cardErr.getText());
+        }
+        catch (Exception e){
+            System.out.println("Correct card number");
+        }
+
+    }
+
+    public void cartCOnfirmedMeth(){
         longWait.until(visibilityOf(cartConfirmed));
         assertThat(cartConfirmed.getAttribute("content-desc"),equalTo("Ok"));
         cartConfirmed.click();

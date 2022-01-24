@@ -11,15 +11,25 @@ public class PassOrderSteps implements En {
             passOrderPage.clickOnContinue();
             passOrderPage.ConnectionPageVerif();
             passOrderPage.enterCredentials(mail,password);
+            passOrderPage.checkErrorMsg(mail,password);
+            passOrderPage.successMsgClick();
             passOrderPage.loggedIn();
         });
 
+        /*When("^user wants to add a specified \"([^\"]*)\" to his cart$", (String product) -> {
+            passOrderPage.addProductToCart(product);
+        });*/
         When("^user wants to add products to his cart$", () -> {
             passOrderPage.addProductToCart();
         });
         Then("^user should be able to confirm his order using his card information: \"([^\"]*)\" \"([^\"]*)\" and \"([^\"]*)\"$", (String cardNbre, String expirationDate, String code) -> {
             passOrderPage.confirmCart(cardNbre, expirationDate, code);
+            System.out.println("---checkErrCar--IN--");
+            passOrderPage.checkErrMsgCard();
+            System.out.println("---checkErrCar--OUT--");
+            passOrderPage.cartCOnfirmedMeth();
         });
+
 
     }
 }

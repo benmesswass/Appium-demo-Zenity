@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.SplittableRandom;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -44,6 +45,10 @@ public abstract class View {
 
     @AndroidFindBy(xpath="//android.widget.Button[1]")
     private MobileElement isOK;
+
+    @AndroidFindBy(xpath="//android.view.View[@index=\"6\"]")
+    private MobileElement errorMailMsg;
+
     protected AppiumDriver<MobileElement> driver;
 
     protected WebDriverWait wait;
@@ -83,12 +88,35 @@ public abstract class View {
         passwordField.click();
         passwordField.sendKeys(password);
         longWait.until(elementToBeClickable(continueBtn)).click();
-        longWait.until(elementToBeClickable(registrationSuccessMsg)).click();
     }
 
+    public void successMsgClick() {
+        try {
+            longWait.until(elementToBeClickable(registrationSuccessMsg));
+            registrationSuccessMsg.click();
+        } catch (Exception e) {
+            System.out.println("-----exception invalid credentials-------");
+            e.printStackTrace();
+        }
+    }
+
+
     public void loggedIn() {
+/*
+        longWait.until(elementToBeClickable(registrationSuccessMsg)).click();
+*/
         longWait.until(visibilityOf(flashDeals));
         assertThat(flashDeals.isDisplayed(),equalTo(true));
+    }
+
+    public void checkErrorMsg(String mail, String password ){
+        try {
+            wait.until(ExpectedConditions.visibilityOf(errorMailMsg));
+            Assert.fail("invalid credentials:  \n mail: "+mail+"\n password: "+ password+"\n "+errorMailMsg.getAttribute("content-desc"));
+        }
+        catch(Exception e){
+            System.out.println("---valid credentials: mail: "+mail+", password: "+ password);
+        }
     }
 
 

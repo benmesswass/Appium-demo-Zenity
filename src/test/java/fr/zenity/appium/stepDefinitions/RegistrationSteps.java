@@ -8,6 +8,7 @@ public class RegistrationSteps implements En {
     public RegistrationSteps(RegistrationPage registrationPage){
 
         Given("^user is on the home page$",() -> {
+
             registrationPage.applicationOk();
         });
 
@@ -21,8 +22,9 @@ public class RegistrationSteps implements En {
             registrationPage.submit();
         });
 
-        Then("^user should be registered$",() -> {
-            registrationPage.registrationConfirmation();
+        Then("^user should be registered with his \"([^\"]*)\" and his \"([^\"]*)\"$",(String mail, String password) -> {
+            registrationPage.checkErrorMsg(mail, password);
+            registrationPage.successMsgClick();
         });
 
 

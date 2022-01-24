@@ -9,7 +9,7 @@ public class Hooks implements En {
 /*
     public Hooks(){
         After((Scenario scenario)->{
-            Utils.takeScreenshot(scenario.getName());
+            fr.zenity.appium.Utils.takeScreenshot(scenario.getName());
             System.out.println("--------Im in After---------------");
         });
     }
@@ -17,7 +17,7 @@ public class Hooks implements En {
     @After(order = 1000)
     public void screenshots(Scenario scenario){
         System.out.println("--------Im in After---------------");
-        Utils.takeScreenshot(scenario.getName());
+        fr.zenity.appium.Utils.takeScreenshot(scenario.getName());
     }
 
  */
