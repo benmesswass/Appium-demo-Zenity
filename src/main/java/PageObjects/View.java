@@ -11,11 +11,13 @@ import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.junit.Assert;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.SplittableRandom;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -117,6 +119,26 @@ public abstract class View {
         catch(Exception e){
             System.out.println("---valid credentials: mail: "+mail+", password: "+ password);
         }
+    }
+
+    public MobileElement searchElement(List<MobileElement> listProducts, String element){
+        MobileElement productChosen = null;
+        System.out.println("product= "+element);
+        System.out.println("listProducts.size()= "+listProducts.size());
+
+        for (int i=0; i<listProducts.size();i++){
+            //System.out.println("listProducts= "+listProducts.get(i).getAttribute("content-desc")+", index is: "+i);
+            //System.out.println("yes or no: "+listProducts.get(i).getAttribute("content-desc").contains(element));
+
+            if (listProducts.get(i).getAttribute("content-desc").contains(element)){
+                productChosen = listProducts.get(i);
+              //  System.out.println("----productChosen in if----"+productChosen.getAttribute("content-desc"));
+            }
+            System.out.println("----productChosen in for: "+productChosen.getAttribute("content-desc"));
+        }
+        System.out.println("----productChosen out of if---");
+        System.out.println("----productChosen out of if----"+productChosen);
+        return productChosen;
     }
 
 

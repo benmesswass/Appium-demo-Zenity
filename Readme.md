@@ -103,13 +103,14 @@ In order to run our program, you should respect the following prerequisites.
 3. Run the Emulator
    ```sh
    cd C:\Users\PC77_Zenity\AppData\Local\Local\Android\Sdk\emulator
-   emulator -avd Pixel2
+   emulator -avd Pixel4
    for headless mode: 
-   emulator -avd Pixel2 -no-window
+   emulator -avd Pixel4 -no-window
    ```
 
 4. Run the project using Maven
    ```sh
+   mvn clean test -Dcucumber.filter.tags='@PassOrder'
    mvn clean test -Dcucumber.filter.tags='@non-reg'
    ```
 
