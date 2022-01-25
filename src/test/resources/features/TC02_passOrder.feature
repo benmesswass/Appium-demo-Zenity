@@ -9,6 +9,6 @@ Feature: As a user I want to pass an order
     Examples:
       | cardNbre                         | expirationDate      |code| mail                       | password  | product    |
       | 4242424242424242                 | 11/24               |123 | gregoryzenity@yopmail.com  | Test12345 | Gloves     |
-      | 4242424242424242                 | 11/24               |123 | gregoryzenity@yopmail.com  | Test12345 | PS4        |
-      #| 424242424242                     | 12/24               |123 | gregoryzenity2@yopmail.com | Test12345 |
-      #| 4242424242424242                 | 16/24               |123 | gregoryzenity3@yopmail.com | Test12345 |
+      | 4242424242424                    | 11/24               |123 | gregoryzenity@yopmail.com  | Test12345 | PS4        |
+      | 4242424242424242                 | 18/24               |123 | gregoryzenity2@yopmail.com | Test12345 | Nike       |
+      | 4242424242424242                 | 12/21               |123 | gregoryzenity3@yopmail.com | Test12345 | PS4        |

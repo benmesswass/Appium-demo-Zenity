@@ -9,5 +9,5 @@ Feature: As a user I want to login to my account
     Examples:
       | mail                         | password      |
       | gregoryzenity@yopmail.com    | Test12345     |
-      | gregoryzenity2yopmail.com   | Test12345     |
-      #| gregoryzenity3@yopmail.com    | Test12345     |
+      | gregoryzenity2yopmail.com    | Test12345     |
+      # gregoryzenity3@yopmailcom   | Test12345     |
