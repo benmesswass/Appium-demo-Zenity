@@ -18,6 +18,7 @@ public class LoginSteps implements En {
 
         Then("^user should be logged in with his \"([^\"]*)\" and his \"([^\"]*)\"$",(String mail, String password)  -> {
             loginPage.checkErrorMsg(mail, password);
+            loginPage.checkErrorMsg2(mail, password);
             loginPage.successMsgClick();
             loginPage.loggedIn();
         });

@@ -48,8 +48,14 @@ public abstract class View {
     @AndroidFindBy(xpath="//android.widget.Button[1]")
     private MobileElement isOK;
 
+    @AndroidFindBy(xpath="//android.view.View[@index=\"2\"]")
+    private MobileElement passwordIncorrect;
+
     @AndroidFindBy(xpath="//android.view.View[@index=\"6\"]")
     private MobileElement errorMailMsg;
+
+
+
 
     protected AppiumDriver<MobileElement> driver;
 
@@ -115,6 +121,16 @@ public abstract class View {
         try {
             wait.until(ExpectedConditions.visibilityOf(errorMailMsg));
             Assert.fail("invalid credentials:  \n mail: "+mail+"\n password: "+ password+"\n "+errorMailMsg.getAttribute("content-desc"));
+        }
+        catch(Exception e){
+            System.out.println("---valid credentials: mail: "+mail+", password: "+ password);
+        }
+    }
+
+    public void checkErrorMsg2(String mail, String password ) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(passwordIncorrect));
+            Assert.fail("invalid credentials:  \n mail: "+mail+"\n password: "+ password+"\n "+passwordIncorrect.getAttribute("content-desc"));
         }
         catch(Exception e){
             System.out.println("---valid credentials: mail: "+mail+", password: "+ password);
