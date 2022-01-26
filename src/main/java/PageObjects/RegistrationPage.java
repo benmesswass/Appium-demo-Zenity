@@ -49,7 +49,7 @@ public class RegistrationPage extends View{
         longWait.until(elementToBeClickable(registerButton)).click();
     }
 
-    public  void enterCredentials(String mail, String password) {
+    public  void enterCredentialsRegistration(String mail, String password, String confirmPassword) {
 
             shortWait.until(elementToBeClickable(mailField)).click();
             mailField.click();
@@ -59,15 +59,8 @@ public class RegistrationPage extends View{
             passwordField.sendKeys(password);
             shortWait.until(elementToBeClickable(confirmPasswordField)).click();
             confirmPasswordField.click();
-            confirmPasswordField.sendKeys(password);
+            confirmPasswordField.sendKeys(confirmPassword);
 
-        /*
-        if (shortWait.until(visibilityOf(errorMailMsg)).getText() == ){
-
-        }
-         */
-
-        //longWait.until(elementToBeClickable(continueBtn)).click();
     }
 
     public void submit(){
@@ -75,24 +68,4 @@ public class RegistrationPage extends View{
         continueBtn.click();
     }
 
-    /*public void checkErrorMsg(String mail, String password ){
-        try {
-            wait.until(ExpectedConditions.visibilityOf(errorMailMsg));
-            Assert.fail("invalid credentials:  \n mail: "+mail+"\n password: "+ password+"\n "+errorMailMsg.getAttribute("content-desc"));
-        }
-        catch(Exception e){
-        System.out.println("---valid credentials: mail: "+mail+", password: "+ password);
-        }
-    }*/
- /*   public void successMsgClick()  {
-        try {
-            longWait.until(elementToBeClickable(registrationSuccessMsg));
-            registrationSuccessMsg.click();
-        }
-        catch(Exception e){
-        System.out.println("-----exception invalid credentials-------");
-        e.printStackTrace();
-        }
-        }
-  */
 }

@@ -17,16 +17,19 @@ public class RegistrationSteps implements En {
             registrationPage.clickOnRegistered();
         });
 
-        And("^user enters his \"([^\"]*)\" and his \"([^\"]*)\"$",(String mail, String password) -> {
-            registrationPage.enterCredentials(mail,password);
+        And("^user enters his \"([^\"]*)\" his \"([^\"]*)\" and \"([^\"]*)\"$", (String mail, String password, String confirmPassword) -> {
+            registrationPage.enterCredentialsRegistration(mail,password, confirmPassword);
             registrationPage.submit();
         });
+        /*And("^user enters his \"([^\"]*)\" and his \"([^\"]*)\"$",(String mail, String password) -> {
+            registrationPage.enterCredentials(mail,password);
+            registrationPage.submit();
+        });*/
 
         Then("^user should be registered with his \"([^\"]*)\" and his \"([^\"]*)\"$",(String mail, String password) -> {
             registrationPage.checkErrorMsg(mail, password);
             registrationPage.successMsgClick();
         });
-
 
     }
 }

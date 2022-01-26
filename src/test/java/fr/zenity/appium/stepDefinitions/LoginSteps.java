@@ -13,7 +13,7 @@ public class LoginSteps implements En {
         });
 
         When("^user tries to connect with his \"([^\"]*)\" and his \"([^\"]*)\"$", (String mail, String password) -> {
-            loginPage.enterCredentials(mail, password);
+            loginPage.enterCredentialsLogin(mail, password);
         });
 
         Then("^user should be logged in with his \"([^\"]*)\" and his \"([^\"]*)\"$",(String mail, String password)  -> {

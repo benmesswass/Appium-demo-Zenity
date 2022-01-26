@@ -82,7 +82,7 @@ public abstract class View {
         assertThat(connectionPage.isDisplayed(),equalTo(true));
     }
 
-    public  void enterCredentials(String mail, String password) {
+    public  void enterCredentialsLogin(String mail, String password) {
         shortWait.until(elementToBeClickable(mailField)).click();
         mailField.click();
         mailField.sendKeys(mail);
