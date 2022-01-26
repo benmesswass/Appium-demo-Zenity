@@ -48,13 +48,14 @@ public abstract class View {
     @AndroidFindBy(xpath="//android.widget.Button[1]")
     private MobileElement isOK;
 
-    @AndroidFindBy(xpath="//android.view.View[@index=\"2\"]")
+    /*@AndroidFindBy(xpath="//android.view.View[@index=\"2\"]")
+    private MobileElement passwordIncorrect;*/
+
+    @AndroidFindBy(xpath="//android.view.View[@content-desc=\"Email ou Mot de passe incorrect\"]")
     private MobileElement passwordIncorrect;
 
     @AndroidFindBy(xpath="//android.view.View[@index=\"6\"]")
     private MobileElement errorMailMsg;
-
-
 
 
     protected AppiumDriver<MobileElement> driver;
