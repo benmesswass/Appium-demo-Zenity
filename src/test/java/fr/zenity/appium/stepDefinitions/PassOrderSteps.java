@@ -12,6 +12,7 @@ public class PassOrderSteps implements En {
             passOrderPage.ConnectionPageVerif();
             passOrderPage.enterCredentialsLogin(mail,password);
             passOrderPage.checkErrorMsg(mail,password);
+            passOrderPage.checkErrorMsg2(mail,password);
             passOrderPage.successMsgClick();
             passOrderPage.loggedIn();
         });
