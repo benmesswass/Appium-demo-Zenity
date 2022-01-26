@@ -3,7 +3,7 @@ Feature: As a user I want to pass an order
 
   @PassOrder
   Scenario Outline: passOrder scenario
-    Given user is connected to his account with his "<mail>" and his "<password>"
+    Given user is on the home page
     When  user wants to add a specified "<product>" to his cart
     Then  user should be able to confirm his order using his card information: "<cardNbre>" "<expirationDate>" and "<code>"
     Examples:

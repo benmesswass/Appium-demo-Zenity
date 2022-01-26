@@ -57,6 +57,8 @@ public abstract class View {
     @AndroidFindBy(xpath="//android.view.View[@index=\"6\"]")
     private MobileElement errorMailMsg;
 
+    @AndroidFindBy(xpath="//android.widget.ImageView[@index=\"3\"]")
+    private MobileElement myAccount;
 
     protected AppiumDriver<MobileElement> driver;
 
@@ -80,13 +82,23 @@ public abstract class View {
 
     }
 
+    public boolean applicationOk(){
+        longWait.until(visibilityOf(isOK));
+        return true;
+    }
+
     public void clickOnContinue(){
         shortWait.until(elementToBeClickable(isOK)).click();
     }
 
-    public void ConnectionPageVerif() {
+    public void loginPageVerif() {
         longWait.until(visibilityOf(connectionPage));
         assertThat(connectionPage.isDisplayed(),equalTo(true));
+    }
+
+    public void homePageVerif() {
+        longWait.until(visibilityOf(myAccount));
+        assertThat(myAccount.isDisplayed(),equalTo(true));
     }
 
     public  void enterCredentialsLogin(String mail, String password) {
@@ -109,14 +121,10 @@ public abstract class View {
         }
     }
 
-
-    public void loggedIn() {
-/*
-        longWait.until(elementToBeClickable(registrationSuccessMsg)).click();
-*/
+ /*   public void loggedIn() {
         longWait.until(visibilityOf(flashDeals));
         assertThat(flashDeals.isDisplayed(),equalTo(true));
-    }
+    }*/
 
     public void checkErrorMsg(String mail, String password ){
         try {

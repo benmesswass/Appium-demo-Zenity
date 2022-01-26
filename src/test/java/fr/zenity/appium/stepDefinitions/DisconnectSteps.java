@@ -6,14 +6,14 @@ import io.cucumber.java8.En;
 public class DisconnectSteps implements En {
 
     public DisconnectSteps(DisconnectionPage disconnectionPage) {
-        Given("^user is logged in$", () -> {
-            disconnectionPage.disconnect();
-        });
         When("^user wants to disconnect from his account$", () -> {
             System.out.println("user wants to disconnect from his account");
+            //Thread.sleep(10000);
+            disconnectionPage.disconnect();
+            //Thread.sleep(10000);
         });
         Then("^user should be able to disconnect$", () -> {
-            System.out.println("user should be able to disconnect");
+            disconnectionPage.loginPageVerif();
         });
     }
 }

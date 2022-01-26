@@ -7,10 +7,10 @@ public class LoginSteps implements En {
 
     public LoginSteps(LoginPage loginPage) {
 
-        Given("^user is on the connexion page$", () -> {
+        /*Given("^user is on the login page$", () -> {
             loginPage.clickOnContinue();
             loginPage.ConnectionPageVerif();
-        });
+        });*/
 
         When("^user tries to connect with his \"([^\"]*)\" and his \"([^\"]*)\"$", (String mail, String password) -> {
             loginPage.enterCredentialsLogin(mail, password);
@@ -20,7 +20,7 @@ public class LoginSteps implements En {
             loginPage.checkErrorMsg(mail, password);
             loginPage.checkErrorMsg2(mail, password);
             loginPage.successMsgClick();
-            loginPage.loggedIn();
+            loginPage.loginPageVerif();
         });
 
     }

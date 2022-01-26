@@ -7,13 +7,13 @@ public class RegistrationSteps implements En {
 
     public RegistrationSteps(RegistrationPage registrationPage){
 
-        Given("^user is on the home page$",() -> {
-
+        /*Given("^user is on the login page$",() -> {
             registrationPage.applicationOk();
-        });
+            registrationPage.clickOnContinue();
+        });*/
 
         When("^user clicks on register button$", () -> {
-            registrationPage.clickOnContinue();
+            //registrationPage.clickOnContinue();
             registrationPage.clickOnRegistered();
         });
 

@@ -9,7 +9,7 @@ public class PassOrderSteps implements En {
 
         Given("^user is connected to his account with his \"([^\"]*)\" and his \"([^\"]*)\"$", (String mail, String password) -> {
             passOrderPage.clickOnContinue();
-            passOrderPage.ConnectionPageVerif();
+            passOrderPage.loginPageVerif();
             passOrderPage.enterCredentialsLogin(mail,password);
             passOrderPage.checkErrorMsg(mail,password);
             passOrderPage.checkErrorMsg2(mail,password);

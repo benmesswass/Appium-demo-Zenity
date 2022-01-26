@@ -9,7 +9,6 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
 import io.qameta.allure.Attachment;
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.core.config.Order;
 import org.openqa.selenium.OutputType;
@@ -25,7 +24,7 @@ import java.util.UUID;
 
 public class BaseRunner extends AbstractTestNGCucumberTests {
 
-    @BeforeMethod
+    @BeforeSuite
     public void setUp() {
         if (!AppiumServer.isRunning()) AppiumServer.start();
         MobileDriverManager
@@ -37,7 +36,7 @@ public class BaseRunner extends AbstractTestNGCucumberTests {
     }
 
 
-    @AfterMethod
+    @AfterSuite
     public void tearDown(){
         MobileDriverManager.driver().quit();
         if(AppiumServer.isRunning()) AppiumServer.Stop();
