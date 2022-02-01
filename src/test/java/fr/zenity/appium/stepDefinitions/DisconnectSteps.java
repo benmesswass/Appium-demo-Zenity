@@ -8,7 +8,7 @@ public class DisconnectSteps implements En {
     public DisconnectSteps(DisconnectionPage disconnectionPage) {
         When("^user wants to disconnect from his account$", () -> {
             System.out.println("user wants to disconnect from his account");
-            //Thread.sleep(10000);
+            Thread.sleep(5000);
             disconnectionPage.disconnect();
             //Thread.sleep(10000);
         });

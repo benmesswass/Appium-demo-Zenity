@@ -20,7 +20,8 @@ public class LoginSteps implements En {
             loginPage.checkErrorMsg(mail, password);
             loginPage.checkErrorMsg2(mail, password);
             loginPage.successMsgClick();
-            loginPage.loginPageVerif();
+            System.out.println("before home page Verif");
+            loginPage.homePageVerif();
         });
 
     }

@@ -1,7 +1,6 @@
-@non-reg
+@Scenario3
 Feature: As a user I want to login to my account
 
-  @Login
   Scenario Outline: Login scenario
     Given user is on the login page
     When  user tries to connect with his "<mail>" and his "<password>"
@@ -9,6 +8,6 @@ Feature: As a user I want to login to my account
     Examples:
       | mail                         | password      |
       | gregoryzenity2@yopmail.com   | Test12345     |
-      #| gregoryzenity2yopmail.com    | Test12345     |
+      #| gregoryzenity2@yopmail.com    | Test12345     |
       #| gregoryzenity2@yopmail.com   | Test1         |
       #| gregoryzenity@yopmail.com    | Test22345     |

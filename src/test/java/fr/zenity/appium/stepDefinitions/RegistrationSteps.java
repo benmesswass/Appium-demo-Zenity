@@ -13,22 +13,20 @@ public class RegistrationSteps implements En {
         });*/
 
         When("^user clicks on register button$", () -> {
-            //registrationPage.clickOnContinue();
-            registrationPage.clickOnRegistered();
+                registrationPage.clickOnRegistered();
         });
 
         And("^user enters his \"([^\"]*)\" his \"([^\"]*)\" and \"([^\"]*)\"$", (String mail, String password, String confirmPassword) -> {
             registrationPage.enterCredentialsRegistration(mail,password, confirmPassword);
             registrationPage.submit();
         });
-        /*And("^user enters his \"([^\"]*)\" and his \"([^\"]*)\"$",(String mail, String password) -> {
-            registrationPage.enterCredentials(mail,password);
-            registrationPage.submit();
-        });*/
 
         Then("^user should be registered with his \"([^\"]*)\" and his \"([^\"]*)\"$",(String mail, String password) -> {
             registrationPage.checkErrorMsg(mail, password);
+            registrationPage.checkErrorMsg2(mail, password);
             registrationPage.successMsgClick();
+            System.out.println("before home page Verif");
+            registrationPage.homePageVerif();
         });
 
     }

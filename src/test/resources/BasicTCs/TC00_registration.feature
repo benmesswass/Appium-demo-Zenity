@@ -1,4 +1,4 @@
-@non-reg
+@BasicTCs
 Feature: As a user I want to register a user account
 
   @Registration
@@ -9,7 +9,7 @@ Feature: As a user I want to register a user account
     Then  user should be registered with his "<mail>" and his "<password>"
     Examples:
       | mail                         | password      | confirmPassword |
-      | gregoryzenity@yopmail.com     | Test12345     | Test12345       |
+      | gregoryzenityyopmail.com     | Test12345     | Test12345       |
       #| gregoryzenity@yopmail.com    | Test12345     | Test12345       |
       #| gregoryzenity@yopmail.com    | Test12345     | Test123         |
 

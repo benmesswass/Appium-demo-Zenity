@@ -3,7 +3,12 @@ package fr.zenity.appium.Runner;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-        features = "./src/test/resources/features",
+        features = {
+                "./src/test/resources/BasicTCs",
+                "./src/test/resources/Scenario1",
+                "./src/test/resources/Scenario2",
+                "./src/test/resources/Scenario3"
+        },
         monochrome = true,
         glue = {"fr.zenity.appium.stepDefinitions", "fr/zenity/academy/pageObjects", "fr/zenity/academy/listeners"},
         plugin = {

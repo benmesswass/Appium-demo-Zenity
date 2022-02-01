@@ -108,13 +108,25 @@ In order to run our program, you should respect the following prerequisites.
    emulator -avd Pixel4 -no-window
    ```
 
-4. Run the project using Maven
+4. Run the project using Maven 
+   1. Run all tests:
+      registration -> disconnection -> login -> passOrder
    ```sh
-   mvn clean test -Dcucumber.filter.tags='@PassOrder'
-   mvn clean test -Dcucumber.filter.tags='@non-reg'
+      mvn clean test -Dcucumber.filter.tags='@non-reg'
    ```
-
-5. Check the results using allure report
+   
+   2. Run Scenario 1: 
+   registration -> disconnection -> login -> passOrder
+   ```sh
+   mvn clean test -Dcucumber.filter.tags="@Scenario1"
+   ```
+   3. Run Scenario 2:
+      login -> disconnection
+   ```sh
+   mvn clean test -Dcucumber.filter.tags="@Scenario2"
+   ```
+   
+6. Check the results using allure report
     * Open cmd
     * cd ProjectPath
     * Launch the results report using the following command:

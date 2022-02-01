@@ -2,14 +2,19 @@ package PageObjects;
 
 import fr.zenity.appium.Enum.Direction;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.time.Duration;
 import java.util.List;
 
+import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
@@ -53,6 +58,16 @@ public class PassOrderPage extends View{
     @AndroidFindBy(className="android.view.View")
     private List<MobileElement> productsList;
 
+    @AndroidFindBy(xpath="//android.widget.FrameLayout[@index=\"0\"]")
+    private MobileElement cancelCard;
+
+    @AndroidFindBy(xpath="//android.widget.Button[@index=\"0\"]")
+    private MobileElement backBtn;
+
+    @AndroidFindBy(xpath="//android.widget.ImageView[@index=\"0\"]")
+    private MobileElement secondBackBtn;
+
+    TouchAction touchAction = new TouchAction(driver);
 
     public void loggedIn() {
         longWait.until(visibilityOf(flashDeals));
@@ -108,21 +123,30 @@ public class PassOrderPage extends View{
         longWait.until(elementToBeClickable(saveBtn)).click();
     }
 
-    public void checkErrMsgCard(){
+    public void checkErrMsgCard() throws InterruptedException {
         try {
+            System.out.println("im in try");
             longWait.until(ExpectedConditions.visibilityOf(cardErr));
-            Assert.fail("ERROR: "+cardErr.getText());
+            String cardErrMsg = cardErr.getText();
+            touchAction.press(PointOption.point(200, 200))
+                    .perform();
+            longWait.until(elementToBeClickable(backBtn));
+            backBtn.click();
+            longWait.until(elementToBeClickable(secondBackBtn));
+            secondBackBtn.click();
+            Assert.fail("ERROR: "+cardErrMsg);
         }
         catch (Exception e){
-            System.out.println("Correct card number");
+            longWait.until(visibilityOf(cartConfirmed));
+            assertThat(cartConfirmed.getAttribute("content-desc"),equalTo("Ok"));
+            System.out.println("before click");
+            cartConfirmed.click();
+            try {
+                cartConfirmed.click();
+            } catch (Exception ex){
+                System.out.println("clicked");
+            }
         }
-
-    }
-
-    public void cartCOnfirmedMeth(){
-        longWait.until(visibilityOf(cartConfirmed));
-        assertThat(cartConfirmed.getAttribute("content-desc"),equalTo("Ok"));
-        cartConfirmed.click();
     }
 
 }

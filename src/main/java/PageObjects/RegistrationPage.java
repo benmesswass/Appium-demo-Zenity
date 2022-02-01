@@ -33,6 +33,9 @@ public class RegistrationPage extends View{
     @AndroidFindBy(xpath="//android.widget.Button[@index=\"3\"]")
     private MobileElement registrationSuccessMsg;
 
+    @AndroidFindBy(xpath="//android.widget.Button[@index=\"7\"]")
+    private MobileElement continueBtnCharging;
+
     /*@AndroidFindBy(xpath="//android.view.View[@index=\"6\"]")
     private MobileElement errorMailMsg;*/
 
@@ -46,7 +49,12 @@ public class RegistrationPage extends View{
     }
 
     public void clickOnRegistered() {
+        try{
         longWait.until(elementToBeClickable(registerButton)).click();
+        }
+        catch (Exception e){
+            System.out.println("Already in registration page");
+        }
     }
 
     public  void enterCredentialsRegistration(String mail, String password, String confirmPassword) {
@@ -64,8 +72,12 @@ public class RegistrationPage extends View{
     }
 
     public void submit(){
-        wait.until(ExpectedConditions.visibilityOf(continueBtn));
-        continueBtn.click();
+        try{
+            continueBtn.click();
+        }
+        catch(Exception e){
+        continueBtnCharging.click();
+         }
     }
 
 }

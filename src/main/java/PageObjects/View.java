@@ -27,8 +27,11 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 public abstract class View {
 
-    @AndroidFindBy(xpath="//android.view.View[@index=\"9\"]")
+    @AndroidFindBy(xpath="//android.view.View[@index=\"1\"]")
     private MobileElement connectionPage;
+
+    @AndroidFindBy(xpath="//android.widget.ImageView[@index=\"1\"]")
+    private List<MobileElement> homePageDisplayed;
 
     @AndroidFindBy(xpath="//android.widget.ImageView[@index=\"0\"]")
     private MobileElement mailField;
@@ -39,13 +42,16 @@ public abstract class View {
     @AndroidFindBy(xpath="//android.widget.Button[@index=\"5\"]")
     private MobileElement continueBtn;
 
+    @AndroidFindBy(xpath="//android.widget.Button[@index=\"7\"]")
+    private MobileElement continueBtnCharging;
+
     @AndroidFindBy(xpath="//android.widget.Button[@index=\"3\"]")
     private MobileElement registrationSuccessMsg;
 
     @AndroidFindBy(xpath="//android.widget.ImageView[@index=\"4\"]")
     private MobileElement flashDeals;
 
-    @AndroidFindBy(xpath="//android.widget.Button[1]")
+    @AndroidFindBy(xpath="//android.widget.Button[@index=\"1\"]")
     private MobileElement isOK;
 
     /*@AndroidFindBy(xpath="//android.view.View[@index=\"2\"]")
@@ -82,53 +88,68 @@ public abstract class View {
 
     }
 
-    public boolean applicationOk(){
+    /*public boolean applicationOk(){
         longWait.until(visibilityOf(isOK));
         return true;
-    }
+    }*/
 
     public void clickOnContinue(){
         shortWait.until(elementToBeClickable(isOK)).click();
     }
 
-    public void loginPageVerif() {
-        longWait.until(visibilityOf(connectionPage));
-        assertThat(connectionPage.isDisplayed(),equalTo(true));
+    public void loginPageVerif(){
+        try {
+            longWait.until(visibilityOf(connectionPage));
+        }
+        catch (Exception e) {
+            Assert.assertTrue("Oops ! The login page is now displayed.", connectionPage.isDisplayed());
+        }
     }
 
     public void homePageVerif() {
-        longWait.until(visibilityOf(myAccount));
-        assertThat(myAccount.isDisplayed(),equalTo(true));
+        //longWait.until(visibilityOf(myAccount));
+        System.out.println("homePageDisplayed.isDisplayed(): "+homePageDisplayed.size());
+        if (homePageDisplayed.size() == 0){
+            Assert.fail("Oops ! HomePage not displayed!");
+        }
     }
 
     public  void enterCredentialsLogin(String mail, String password) {
-        shortWait.until(elementToBeClickable(mailField)).click();
-        mailField.click();
+        shortWait.until(visibilityOf(mailField)).click();
+        //mailField.click();
         mailField.sendKeys(mail);
-        shortWait.until(elementToBeClickable(passwordField)).click();
-        passwordField.click();
+        shortWait.until(visibilityOf(passwordField)).click();
+        //passwordField.click();
         passwordField.sendKeys(password);
-        longWait.until(elementToBeClickable(continueBtn)).click();
+        try {
+            continueBtn.click();
+        }
+        catch(Exception e){
+            continueBtnCharging.click();
+        }
     }
 
-    public void successMsgClick() {
+    public  void deleteCredentialsLogin() {
+        shortWait.until(elementToBeClickable(mailField)).click();
+        mailField.clear();
+        shortWait.until(elementToBeClickable(passwordField)).click();
+        passwordField.clear();
+    }
+
+        public void successMsgClick() {
         try {
             longWait.until(elementToBeClickable(registrationSuccessMsg));
             registrationSuccessMsg.click();
         } catch (Exception e) {
-            System.out.println("-----exception invalid credentials-------");
+            System.out.println("Credentials issue");
             e.printStackTrace();
         }
     }
 
- /*   public void loggedIn() {
-        longWait.until(visibilityOf(flashDeals));
-        assertThat(flashDeals.isDisplayed(),equalTo(true));
-    }*/
-
     public void checkErrorMsg(String mail, String password ){
         try {
             wait.until(ExpectedConditions.visibilityOf(errorMailMsg));
+            deleteCredentialsLogin();
             Assert.fail("invalid credentials:  \n mail: "+mail+"\n password: "+ password+"\n "+errorMailMsg.getAttribute("content-desc"));
         }
         catch(Exception e){
@@ -146,7 +167,7 @@ public abstract class View {
         }
     }
 
-    public MobileElement searchElement(List<MobileElement> listProducts, String element){
+    /*public MobileElement searchElement(List<MobileElement> listProducts, String element){
         MobileElement productChosen = null;
         System.out.println("product= "+element);
         System.out.println("listProducts.size()= "+listProducts.size());
@@ -164,7 +185,7 @@ public abstract class View {
         System.out.println("----productChosen out of if---");
         System.out.println("----productChosen out of if----"+productChosen);
         return productChosen;
-    }
+    }*/
 
 
     /**

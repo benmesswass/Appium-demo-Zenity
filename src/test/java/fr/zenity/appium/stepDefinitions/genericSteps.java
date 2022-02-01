@@ -8,7 +8,7 @@ public class genericSteps implements En {
     public genericSteps(ViewPage viewPage){
         Given("^user is on the login page$",() -> {
             try {
-                viewPage.applicationOk();
+                //viewPage.applicationOk();
                 viewPage.clickOnContinue();
             }
             catch(Exception e){

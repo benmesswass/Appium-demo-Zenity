@@ -1,7 +1,6 @@
-@non-reg
+@Scenario2
 Feature: As a user I want to disconnect from my account
 
-  @Disconnect
   Scenario Outline: disconnect scenario
     Given user is on the home page
     When user wants to disconnect from his account
