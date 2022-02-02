@@ -141,7 +141,6 @@ public abstract class View {
 
         public void successMsgClick(String mail, String password) {
             String newLine = System.getProperty("line.separator");
-
             try {
             System.out.println("in successMsgClick try block");
             longWait.until(elementToBeClickable(registrationSuccessMsg));

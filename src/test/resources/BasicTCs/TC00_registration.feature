@@ -10,14 +10,6 @@ Feature: As a user I want to register a user account
     Examples:
       | mail                         | password      | confirmPassword |
       | gregoryzenityyopmail.com     | Test12345     | Test12345       |
-      | wasszenity@yopmail.com    | Test12345     | Test12345       |
+      #| wasszenity@yopmail.com       | Test12345     | Test12345       |
       #| gregoryzenity@yopmail.com    | Test12345     | Test123         |
 
-  #@Disconnect
-  #Scenario Outline: disconnect scenario
-  #  Given user is logged in
-  #  When user wants to disconnect from his account
-  #  Then  user should be able to disconnect
-  #  Examples:
-  #    | mail                         | password      |
-  #    | appiumtestzenity@yopmail.com | Test12345     |

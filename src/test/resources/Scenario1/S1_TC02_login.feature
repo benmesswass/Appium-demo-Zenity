@@ -8,7 +8,7 @@ Feature: As a user I want to login to my account
     Then  user should be logged in with his "<mail>" and his "<password>"
     Examples:
       | mail                         | password      |
-      #| gregoryzenity2yopmail.com   | Test12345     |
+      | gregoryzenity2yopmail.com   | Test12345     |
       | gregoryzenity2@yopmail.com    | Test12345     |
       #| gregoryzenity2@yopmail.com   | Test1         |
       #| gregoryzenity@yopmail.com    | Test22345     |

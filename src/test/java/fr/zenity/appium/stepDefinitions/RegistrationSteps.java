@@ -7,18 +7,16 @@ public class RegistrationSteps implements En {
 
     public RegistrationSteps(RegistrationPage registrationPage){
 
-        /*Given("^user is on the login page$",() -> {
-            registrationPage.applicationOk();
-            registrationPage.clickOnContinue();
-        });*/
 
         When("^user clicks on register button$", () -> {
             registrationPage.clickOnRegistered();
-            System.out.println(registrationPage.testXLS().get(0));
+            /*System.out.println("registrationPage.testXLS().get(0)= "+registrationPage.testXLS(0).get(0));
+            System.out.println("registrationPage.testXLS().get(1)= "+registrationPage.testXLS(0).get(1));
+            System.out.println("registrationPage.testXLS().get(2)= "+registrationPage.testXLS(0).get(2));*/
         });
 
         And("^user enters his \"([^\"]*)\" his \"([^\"]*)\" and \"([^\"]*)\"$", (String mail, String password, String confirmPassword) -> {
-            registrationPage.enterCredentialsRegistration(mail,password, confirmPassword);
+            registrationPage.enterCredentialsRegistration(registrationPage.testXLS(0).get(0),registrationPage.testXLS(0).get(1), registrationPage.testXLS(0).get(2));
             registrationPage.submit();
         });
 

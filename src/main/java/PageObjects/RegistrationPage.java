@@ -47,11 +47,12 @@ public class RegistrationPage extends View{
         return true;
     }
 
-    public List<String> testXLS(){
+    public List<String> testXLS(int line){
         System.out.println("before user from file= user");
+
         ManagerXLS data = new ManagerXLS();
-        data.load("Login");
-        List<String> user = data.getLine(0);
+        data.load("Registration");
+        List<String> user = data.getLine(line);
         return user;
     }
 
