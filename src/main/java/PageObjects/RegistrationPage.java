@@ -1,9 +1,12 @@
 package PageObjects;
 
+import fr.zenity.appium.manager.ManagerXLS;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -42,6 +45,14 @@ public class RegistrationPage extends View{
     public boolean applicationOk(){
         longWait.until(visibilityOf(isOK));
         return true;
+    }
+
+    public List<String> testXLS(){
+        System.out.println("before user from file= user");
+        ManagerXLS data = new ManagerXLS();
+        data.load("Login");
+        List<String> user = data.getLine(0);
+        return user;
     }
 
     public void clickOnContinue(){

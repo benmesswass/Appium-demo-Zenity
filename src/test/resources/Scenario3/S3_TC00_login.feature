@@ -1,3 +1,4 @@
+@non-reg
 @Scenario3
 Feature: As a user I want to login to my account
 

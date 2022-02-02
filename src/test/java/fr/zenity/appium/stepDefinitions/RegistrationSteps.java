@@ -13,7 +13,8 @@ public class RegistrationSteps implements En {
         });*/
 
         When("^user clicks on register button$", () -> {
-                registrationPage.clickOnRegistered();
+            registrationPage.clickOnRegistered();
+            System.out.println(registrationPage.testXLS().get(0));
         });
 
         And("^user enters his \"([^\"]*)\" his \"([^\"]*)\" and \"([^\"]*)\"$", (String mail, String password, String confirmPassword) -> {
@@ -22,9 +23,9 @@ public class RegistrationSteps implements En {
         });
 
         Then("^user should be registered with his \"([^\"]*)\" and his \"([^\"]*)\"$",(String mail, String password) -> {
-            registrationPage.checkErrorMsg(mail, password);
-            registrationPage.checkErrorMsg2(mail, password);
-            registrationPage.successMsgClick();
+            //registrationPage.checkErrorMsgRegistration(mail, password);
+            //registrationPage.checkErrorMsg2(mail, password);
+            registrationPage.successMsgClick(mail, password);
             System.out.println("before home page Verif");
             registrationPage.homePageVerif();
         });

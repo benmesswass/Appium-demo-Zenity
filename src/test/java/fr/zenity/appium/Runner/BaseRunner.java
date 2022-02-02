@@ -24,7 +24,7 @@ import java.util.UUID;
 
 public class BaseRunner extends AbstractTestNGCucumberTests {
 
-    @BeforeSuite
+    @BeforeTest
     public void setUp() {
         if (!AppiumServer.isRunning()) AppiumServer.start();
         MobileDriverManager
@@ -36,7 +36,7 @@ public class BaseRunner extends AbstractTestNGCucumberTests {
     }
 
 
-    @AfterSuite
+    @AfterTest
     public void tearDown(){
         MobileDriverManager.driver().quit();
         if(AppiumServer.isRunning()) AppiumServer.Stop();

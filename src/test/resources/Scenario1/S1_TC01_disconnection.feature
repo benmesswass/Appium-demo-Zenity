@@ -1,3 +1,4 @@
+@non-reg
 @Scenario1
 Feature: As a user I want to disconnect from my account
 

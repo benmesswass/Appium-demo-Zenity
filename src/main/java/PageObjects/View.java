@@ -63,6 +63,9 @@ public abstract class View {
     @AndroidFindBy(xpath="//android.view.View[@index=\"6\"]")
     private MobileElement errorMailMsg;
 
+    @AndroidFindBy(xpath="//android.view.View[@bounds=\"[127,1280][657,1335]\"]")
+    private MobileElement errorMailMsgReg;
+
     @AndroidFindBy(xpath="//android.widget.ImageView[@index=\"3\"]")
     private MobileElement myAccount;
 
@@ -136,13 +139,19 @@ public abstract class View {
         passwordField.clear();
     }
 
-        public void successMsgClick() {
-        try {
+        public void successMsgClick(String mail, String password) {
+            String newLine = System.getProperty("line.separator");
+
+            try {
+            System.out.println("in successMsgClick try block");
             longWait.until(elementToBeClickable(registrationSuccessMsg));
             registrationSuccessMsg.click();
+            System.out.println("homePageDisplayed.isDisplayed(): "+homePageDisplayed.size());
+            if (homePageDisplayed.size() == 0) {
+                Assert.fail("Oops ! HomePage not displayed!");
+            }
         } catch (Exception e) {
-            System.out.println("Credentials issue");
-            e.printStackTrace();
+            Assert.fail("invalid credentials !"+ newLine+"email: "+mail+newLine+"password: "+password);
         }
     }
 
@@ -161,6 +170,17 @@ public abstract class View {
         try {
             wait.until(ExpectedConditions.visibilityOf(passwordIncorrect));
             Assert.fail("invalid credentials:  \n mail: "+mail+"\n password: "+ password+"\n "+passwordIncorrect.getAttribute("content-desc"));
+        }
+        catch(Exception e){
+            System.out.println("---valid credentials: mail: "+mail+", password: "+ password);
+        }
+    }
+
+    public void checkErrorMsgRegistration(String mail, String password ){
+        try {
+            wait.until(ExpectedConditions.visibilityOf(errorMailMsgReg));
+            deleteCredentialsLogin();
+            Assert.fail("invalid credentials:  \n mail: "+mail+"\n password: "+ password+"\n "+errorMailMsgReg.getAttribute("content-desc"));
         }
         catch(Exception e){
             System.out.println("---valid credentials: mail: "+mail+", password: "+ password);

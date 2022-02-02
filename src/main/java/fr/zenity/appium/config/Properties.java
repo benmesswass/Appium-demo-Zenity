@@ -1,5 +1,7 @@
 package fr.zenity.appium.config;
 
+import fr.zenity.appium.manager.ManagerXLS;
+
 public interface Properties {
     /***
      *
@@ -9,4 +11,7 @@ public interface Properties {
      *
      */
     PropertiesConfig configuration = PropertiesConfig.getInstance();
+
+    ManagerXLS managerXLS = new ManagerXLS();
+
 }

@@ -10,7 +10,7 @@ Feature: As a user I want to register a user account
     Examples:
       | mail                         | password      | confirmPassword |
       | gregoryzenityyopmail.com     | Test12345     | Test12345       |
-      #| gregoryzenity@yopmail.com    | Test12345     | Test12345       |
+      | wasszenity@yopmail.com    | Test12345     | Test12345       |
       #| gregoryzenity@yopmail.com    | Test12345     | Test123         |
 
   #@Disconnect
