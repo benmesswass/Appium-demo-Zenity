@@ -5,6 +5,7 @@ import fr.zenity.appium.drivers.MobileDriverManager;
 import fr.zenity.appium.drivers.utils.LocalDriver;
 import fr.zenity.appium.listeners.AllureListeners;
 import fr.zenity.appium.server.AppiumServer;
+import io.cucumber.java.Scenario;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;

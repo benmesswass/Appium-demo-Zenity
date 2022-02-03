@@ -7,10 +7,14 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import io.qameta.allure.Allure;
 import org.junit.Assert;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.io.ByteArrayInputStream;
 import java.time.Duration;
 import java.util.List;
 
@@ -127,6 +131,8 @@ public class PassOrderPage extends View{
         try {
             System.out.println("im in try");
             longWait.until(ExpectedConditions.visibilityOf(cardErr));
+            //screenshot();
+            Allure.addAttachment("Screenshot", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
             String cardErrMsg = cardErr.getText();
             touchAction.press(PointOption.point(200, 200))
                     .perform();

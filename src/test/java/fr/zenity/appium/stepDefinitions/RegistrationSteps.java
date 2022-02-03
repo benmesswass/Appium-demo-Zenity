@@ -16,7 +16,7 @@ public class RegistrationSteps implements En {
         });
 
         And("^user enters his \"([^\"]*)\" his \"([^\"]*)\" and \"([^\"]*)\"$", (String mail, String password, String confirmPassword) -> {
-            registrationPage.enterCredentialsRegistration(registrationPage.testXLS(0).get(0),registrationPage.testXLS(0).get(1), registrationPage.testXLS(0).get(2));
+            registrationPage.enterCredentialsRegistration(registrationPage.testXLS(0).get(0),registrationPage.testXLS(0).get(1),registrationPage.testXLS(0).get(2));
             registrationPage.submit();
         });
 

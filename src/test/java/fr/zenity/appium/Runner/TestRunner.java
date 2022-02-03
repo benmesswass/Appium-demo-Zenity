@@ -7,7 +7,8 @@ import io.cucumber.testng.CucumberOptions;
                 "./src/test/resources/BasicTCs",
                 "./src/test/resources/Scenario1",
                 "./src/test/resources/Scenario2",
-                "./src/test/resources/Scenario3"
+                "./src/test/resources/Scenario3",
+                "./src/test/resources/ScenarioGreg"
         },
         monochrome = true,
         glue = {"fr.zenity.appium.stepDefinitions", "fr/zenity/academy/pageObjects", "fr/zenity/academy/listeners"},

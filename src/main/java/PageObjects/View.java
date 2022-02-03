@@ -9,13 +9,21 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import io.cucumber.messages.Messages;
+import io.qameta.allure.Allure;
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.SplittableRandom;
@@ -100,11 +108,12 @@ public abstract class View {
         shortWait.until(elementToBeClickable(isOK)).click();
     }
 
-    public void loginPageVerif(){
+    public void loginPageVerif() throws IOException {
         try {
             longWait.until(visibilityOf(connectionPage));
         }
         catch (Exception e) {
+            screenshot();
             Assert.assertTrue("Oops ! The login page is now displayed.", connectionPage.isDisplayed());
         }
     }
@@ -132,6 +141,11 @@ public abstract class View {
         }
     }
 
+    public void screenshot() throws IOException {
+        File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(file, new File("C:/screenshots/Screenshot.jpg"));
+    }
+
     public  void deleteCredentialsLogin() {
         shortWait.until(elementToBeClickable(mailField)).click();
         mailField.clear();
@@ -139,7 +153,7 @@ public abstract class View {
         passwordField.clear();
     }
 
-        public void successMsgClick(String mail, String password) {
+        public void successMsgClick(String mail, String password) throws IOException {
             String newLine = System.getProperty("line.separator");
             try {
             System.out.println("in successMsgClick try block");
@@ -147,9 +161,14 @@ public abstract class View {
             registrationSuccessMsg.click();
             System.out.println("homePageDisplayed.isDisplayed(): "+homePageDisplayed.size());
             if (homePageDisplayed.size() == 0) {
+                Allure.addAttachment("Screenshot", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
+                screenshot();
                 Assert.fail("Oops ! HomePage not displayed!");
             }
+
         } catch (Exception e) {
+                Allure.addAttachment("Screenshot", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
+                screenshot();
             Assert.fail("invalid credentials !"+ newLine+"email: "+mail+newLine+"password: "+password);
         }
     }
@@ -157,6 +176,8 @@ public abstract class View {
     public void checkErrorMsg(String mail, String password ){
         try {
             wait.until(ExpectedConditions.visibilityOf(errorMailMsg));
+            screenshot();
+            Allure.addAttachment("Screenshot", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
             deleteCredentialsLogin();
             Assert.fail("invalid credentials:  \n mail: "+mail+"\n password: "+ password+"\n "+errorMailMsg.getAttribute("content-desc"));
         }
@@ -168,6 +189,8 @@ public abstract class View {
     public void checkErrorMsg2(String mail, String password ) {
         try {
             wait.until(ExpectedConditions.visibilityOf(passwordIncorrect));
+            screenshot();
+            Allure.addAttachment("Screenshot", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
             Assert.fail("invalid credentials:  \n mail: "+mail+"\n password: "+ password+"\n "+passwordIncorrect.getAttribute("content-desc"));
         }
         catch(Exception e){
