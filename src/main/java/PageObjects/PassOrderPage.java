@@ -15,10 +15,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.io.ByteArrayInputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.Duration;
 import java.util.List;
+import java.math.BigDecimal.*;
+
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static java.lang.Math.abs;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
@@ -37,6 +42,9 @@ public class PassOrderPage extends View{
 
     @AndroidFindBy(xpath="//android.widget.ImageView[@index=\"1\"]")
     private MobileElement cartBtn;
+
+    @AndroidFindBy(xpath="//android.widget.ImageView[@index=\"0\"]")
+    private MobileElement productInCart;
 
     @AndroidFindBy(xpath="//android.widget.Button[@index=\"5\"]")
     private MobileElement validateBtn;
@@ -71,8 +79,17 @@ public class PassOrderPage extends View{
     @AndroidFindBy(xpath="//android.widget.ImageView[@index=\"0\"]")
     private MobileElement secondBackBtn;
 
-    TouchAction touchAction = new TouchAction(driver);
+    @AndroidFindBy(xpath="//android.widget.Button[@index=\"2\"]")
+    private MobileElement addProductNbre;
 
+    @AndroidFindBy(xpath="//android.widget.ImageView[@index=\"1\"]")
+    private MobileElement descriptionProduct;
+
+    @AndroidFindBy(xpath="//android.view.View[@index=\"5\"]")
+    private MobileElement totolPriceDisplayed;
+
+    TouchAction touchAction = new TouchAction(driver);
+    int numberInt=1;
     public void loggedIn() {
         longWait.until(visibilityOf(flashDeals));
         assertThat(flashDeals.isDisplayed(),equalTo(true));
@@ -104,22 +121,53 @@ public class PassOrderPage extends View{
                 }
         );
     }
-    public void addProductToCart(String product) throws InterruptedException {
+    public void addProductToCart(String product, String number) throws InterruptedException {
         MobileElement productChosen = null;
+        numberInt = Integer.parseInt(number);
         swipeScreen(Direction.UP);
         swipeScreen(Direction.UP);
-
-        System.out.println("any match: " + productsList.stream().anyMatch(element ->element.getAttribute("content-desc").contains(product)));
+        //System.out.println("any match: " + productsList.stream().anyMatch(element ->element.getAttribute("content-desc").contains(product)));
         productChosen = productsList.stream().filter(element ->element.getAttribute("content-desc").contains(product)).findFirst().get();
-        System.out.println("productChosen= "+productChosen.getAttribute("content-desc"));
-        productChosen.click();
+        //System.out.println("productChosen= "+productChosen.getAttribute("content-desc"));
+        Float priceInt = Float.parseFloat(productChosen.getAttribute("content-desc").split("\n")[1].substring(1));
+        //System.out.println("price= "+priceInt);
 
+        productChosen.click();
         swipeScreen(Direction.UP);
+        for (int i = 1; i<numberInt;i++) {
+        longWait.until(elementToBeClickable(addProductNbre)).click();
+        }
+
         longWait.until(elementToBeClickable(addoToCart)).click();
+        longWait.until(elementToBeClickable(cartBtn)).click();
+
+        Float priceCartFloat = Float.parseFloat(productInCart.getAttribute("content-desc").split("\n")[1].substring(1).split(" ")[0]);
+        Float productNbreInCartFoat = Float.parseFloat(productInCart.getAttribute("content-desc").split("\n")[1].substring(1).split(" ")[1].substring(1));
+        BigDecimal totalPriceRound =  BigDecimal.valueOf(priceCartFloat * productNbreInCartFoat).setScale(2, RoundingMode.FLOOR);
+        Float totalPrice = totalPriceRound.floatValue();
+
+        longWait.until(visibilityOf(totolPriceDisplayed));
+        BigDecimal totalPriceDisplayedRound = BigDecimal.valueOf(Float.parseFloat(totolPriceDisplayed.getAttribute("content-desc").split("\n")[1].substring(1).split(" ")[1])).setScale(2, RoundingMode.FLOOR);
+        Float totalPriceDisplayedFloat = totalPriceDisplayedRound.floatValue();
+        System.out.println("#########################BEGIN#############################");
+        System.out.println("priceInt= "+priceInt);
+        System.out.println("priceCartFloat= "+priceCartFloat);
+        System.out.println("totalPrice= "+totalPrice);
+        System.out.println("totalPriceRound= "+totalPriceRound);
+        System.out.println("totolPriceDisplayedFloat= "+totalPriceDisplayedFloat);
+        System.out.println("totalPriceDisplayedRound= "+totalPriceDisplayedRound);
+        boolean yesorno = (abs(totalPrice-totalPriceDisplayedFloat))<1;
+        System.out.println("yes or no? "+yesorno);
+        //System.out.println("yes or no? "+ (totalPrice ==totalPriceDisplayedFloat));
+
+        System.out.println("#########################END#######################");
+
+        /*Assert.assertTrue(priceInt.equals(priceCartFloat));
+        Assert.assertTrue(abs(totalPrice-totalPriceDisplayedFloat)<1);*/
     }
 
+
     public void confirmCart(String cardNbre,String expirationDate,String code)  {
-        longWait.until(elementToBeClickable(cartBtn)).click();
         longWait.until(elementToBeClickable(validateBtn)).click();
         longWait.until(visibilityOf(cardNbreField)).sendKeys(cardNbre);
         longWait.until(visibilityOf(expirationDateField)).sendKeys(expirationDate);
@@ -129,9 +177,7 @@ public class PassOrderPage extends View{
 
     public void checkErrMsgCard() throws InterruptedException {
         try {
-            System.out.println("im in try");
             longWait.until(ExpectedConditions.visibilityOf(cardErr));
-            //screenshot();
             Allure.addAttachment("Screenshot", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
             String cardErrMsg = cardErr.getText();
             touchAction.press(PointOption.point(200, 200))

@@ -8,6 +8,7 @@ import io.cucumber.testng.CucumberOptions;
                 "./src/test/resources/Scenario1",
                 "./src/test/resources/Scenario2",
                 "./src/test/resources/Scenario3",
+                "./src/test/resources/Scenario4",
                 "./src/test/resources/ScenarioGreg"
         },
         monochrome = true,

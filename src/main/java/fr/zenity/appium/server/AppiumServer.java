@@ -24,7 +24,7 @@ public final class AppiumServer {
         AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder()
                 .withIPAddress(Properties.appConfig.getAppiumServerHost())
                 .usingPort(Properties.appConfig.getAppiumServerPort())
-                .withArgument(GeneralServerFlag.LOG_LEVEL, "debug")
+                .withArgument(GeneralServerFlag.LOG_LEVEL, "warn")
                 .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
                 .withArgument(GeneralServerFlag.RELAXED_SECURITY);
 

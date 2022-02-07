@@ -7,8 +7,8 @@ public class PassOrderSteps implements En {
 
     public PassOrderSteps(PassOrderPage passOrderPage) {
 
-        When("^user wants to add a specified \"([^\"]*)\" to his cart$", (String product) -> {
-            passOrderPage.addProductToCart(product);
+        When("^user wants to add a specified \"([^\"]*)\" and \"([^\"]*)\"to his cart$", (String product, String number) -> {
+            passOrderPage.addProductToCart(product, number);
         });
 
         Then("^user should be able to confirm his order using his card information: \"([^\"]*)\" \"([^\"]*)\" and \"([^\"]*)\"$", (String cardNbre, String expirationDate, String code) -> {
@@ -17,7 +17,5 @@ public class PassOrderSteps implements En {
             //passOrderPage.cartCOnfirmedMeth();
             //passOrderPage.homePageVerif();
         });
-
-
     }
 }

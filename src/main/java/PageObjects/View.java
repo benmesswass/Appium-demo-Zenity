@@ -24,6 +24,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.List;
 import java.util.SplittableRandom;
